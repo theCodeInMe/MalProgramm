@@ -1,73 +1,126 @@
-﻿<Window x:Class="MalProgramm.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MalProgramm"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    
+﻿<Window
+    x:Class="MalProgramm.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MalProgramm"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d">
+
+
     <Grid Background="{x:Static SystemColors.ControlBrush}">
-        
         <Grid.RowDefinitions>
+            <!--<RowDefinition Height="30" />-->
 
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        
         <Grid.ColumnDefinitions>
-            
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="250"/>
-
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="250" />
         </Grid.ColumnDefinitions>
 
-        <ScrollViewer 
-             HorizontalScrollBarVisibility="Auto">
-            
-            <InkCanvas
-                   x:Name="DrawFiled"
-                   Grid.Column="0"
-                   Grid.Row="0"
-                   Background="White"
-                   Margin="5">
+        <GridSplitter
+            Grid.Row=" 0"
+            Grid.Column="1"
+            Width="6"
+            Background="Black"
+            ResizeBehavior="PreviousAndNext" />
 
-            </InkCanvas>
-            
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <InkCanvas
+                Grid.Row=" 0"
+                Grid.Column="0"
+                Background="White" />
         </ScrollViewer>
 
-            <GridSplitter
-                Grid.Column="1"
-                Grid.Row="0"
-                Width="10"
-                ResizeBehavior="PreviousAndNext"
-                Background="Gray" />
-        
-        <ScrollViewer 
-            VerticalScrollBarVisibility="Auto"
+
+        <TextBlock
+            x:Name="statusBar"
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Height="15" />
+        <ScrollViewer
             Grid.Row="0"
-            Grid.Column="2">
-            
+            Grid.Column="2"
+            VerticalScrollBarVisibility="Auto">
+            <!--  Pinseleinstellung  -->
+
             <StackPanel>
-                
-                <Label >Stärke</Label>
+                <Expander IsExpanded="True">
 
-                <Slider x:Name="brushSlider"/>
+                    <Expander.Header>
+                        <StackPanel>
+                            <TextBlock Text="Pinsel_farbe">
+                                <Image Height="25" Source="/Assets/Colors.png" />
 
+
+                            </TextBlock>
+                        </StackPanel>
+                    </Expander.Header>
+
+                    <ListBox
+                        x:Name="colorList"
+                        Height="200"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+
+                        <ListBox.ItemTemplate>
+
+                            <DataTemplate>
+                                <Rectangle
+                                    Width="20"
+                                    Height="20"
+                                    Fill="{Binding Path=Name}"
+                                    ToolTip="{Binding Path=Name}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                    </ListBox>
+                </Expander>
+                <Expander>
+                    <Expander.Header>
+                        <StackPanel>
+                            <TextBlock Text="Pinseleinstellungen">
+                                <Image Height="25" Source="/Assets/Brush.png" />
+                            </TextBlock>
+                        </StackPanel>
+                    </Expander.Header>
+                    <StackPanel>
+                        <Label Content=" _Pinselstärke" Target="{Binding ElementName=brushSlider}" />
+                        <Slider
+                            x:Name="brushSlider"
+                            AutoToolTipPlacement="BottomRight"
+                            IsSnapToTickEnabled="True"
+                            Maximum="100"
+                            Minimum="5"
+                            TickFrequency="5"
+                            TickPlacement="BottomRight" />
+
+                        <Label Content=" Pinsel_form" Target="{Binding ElementName=brushShape}" />
+
+                        <ComboBox x:Name="brushShape" SelectedIndex="0">
+                            <ComboBox.Items>
+                                <TextBlock Text="Kreis" />
+                                <TextBlock Text="Quadrat" />
+                            </ComboBox.Items>
+                        </ComboBox>
+                    </StackPanel>
+
+                </Expander>
             </StackPanel>
 
         </ScrollViewer>
-
-        <TextBlock
-             x:Name="imgText"
-             Grid.Column="0"
-             Grid.Row="1"
-             Grid.ColumnSpan="3"
-             Height="15"
-             Background="Azure"/>
-
     </Grid>
-    
+
+
 </Window>

@@ -94,5 +94,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Brush.png" />
+    <Resource Include="Assets\Close.ico" />
+    <Resource Include="Assets\Colors.png" />
+    <Resource Include="Assets\MainIcon.ico" />
+    <Resource Include="Assets\RubberPoint.png" />
+    <Resource Include="Assets\RubberStroke.png" />
+    <Resource Include="Assets\Select.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
